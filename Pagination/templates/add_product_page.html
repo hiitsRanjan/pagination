@@ -1,0 +1,81 @@
+{% extends 'common.html' %}
+
+
+{% block product %}
+    <style>
+        table th tr{
+            border-style: solid;
+            border-color: orangered;
+            border-width: 2px;
+        }
+        th{
+            padding: 5px;
+        }
+        .title{
+            width: 300px;
+            text-align: center;
+            font-family: "Agency FB";
+            font-size: 20px;
+        }
+        .title_1{
+            font-family: "Agency FB";
+            font-size: 20px;
+        }
+    </style>
+    <form action="{% url 'save_product' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  <table align="center" border="2">
+  <tr>
+      <th class="title">
+          Add Product
+      </th>
+  </tr>
+  <tr>
+      <th class="title_1">
+          <input type="text" placeholder="Name" required name="p1">
+      </th>
+  </tr>
+  <tr>
+       <th class="title_1">
+          <input type="number" placeholder="Price" required name="p2">
+      </th>
+  </tr>
+  <tr>
+       <th class="title_1">
+          <input type="number" placeholder="Quantity" required name="p3">
+      </th>
+  </tr>
+  <tr>
+      <th class="title_1">
+          Product Images:
+          <input type="file" required name="p4">
+      </th>
+  </tr>
+  <tr>
+      <th class="title_1">
+          <select required name="p5">
+              <option>Choose One</option>
+              <option>TVs</option>
+              <option>Mobiles</option>
+              <option>Laptops</option>
+              <option>Cameras</option>
+          </select>
+      </th>
+  </tr>
+  <tr>
+      <th>
+          <button type="submit">SAVE</button>
+      </th>
+  </tr>
+
+          {% for x in messages %}
+             <tr>
+                 <th style="text-align: center;font-family: Chiller;font-size: 10px;color: black;font-size: 30px">
+                     {{ x }}
+                 </th>
+             </tr>
+          {% endfor %}
+
+  </table>
+    </form>
+{% endblock %}

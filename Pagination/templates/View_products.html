@@ -1,0 +1,50 @@
+{% extends 'common.html' %}
+
+{% block product %}
+    {% for x in data %}
+        <style>
+            .list{
+                font-size: 20px;
+                font-family: "Agency FB";
+                padding: 10px;
+                border-color: blue;
+            }
+
+        </style>
+    <table align="center" border="2" width="150" >
+      <tr><th rowspan="6"><img src="{{ x.image.url }}" width="200" height="150"></th></tr>
+      <tr><td class="list">Name:{{ x.name }}</td></tr>
+      <tr><td class="list">Price:{{ x.price }}</td></tr>
+      <tr><td class="list">Quantity:{{ x.quantity }}</td></tr>
+      <tr><td class="list">Date:{{ x.date }}</td></tr>
+      <tr><td class="list">Category:{{ x.category }}</td></tr>
+    </table>
+    {% endfor %}
+        <table align="center" border="2">
+
+         <tr>
+          {% if  data.has_previous %}
+              <th>
+              <a href="{% url 'View_products' %}?pageno={{ data.previous_page_number }}">
+                  Previous
+              </a>
+              </th>
+          {% endif %}
+          {% for x in data.paginator.page_range %}
+              <th width="30" style="text-align: center">
+              <a href="{% url 'View_products' %}?pageno={{ x }}">
+                  {{ x }}
+              </a>
+              </th>
+          {% endfor %}
+          {% if data.has_next %}
+              <th>
+              <a href="{% url 'View_products' %}?pageno={{ data.next_page_number }}">
+                  Next
+              </a>
+              </th>
+          {% endif %}
+        </tr>
+
+        </table>
+{% endblock %}
